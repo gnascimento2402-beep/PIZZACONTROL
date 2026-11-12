@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PizzaControl</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f5f7;
+      color: #222;
+    }
+    aside {
+      position: fixed;
+      width: 220px;
+      height: 100vh;
+      background: #202020;
+      color: white;
+      padding: 25px 18px;
+    }
+    aside h2 { margin-bottom: 35px; }
+    aside a {
+      display: block;
+      color: #eee;
+      text-decoration: none;
+      padding: 14px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    aside a:hover, aside a.active {
+      background: #a91e1e;
+    }
+    main { margin-left: 220px; padding: 32px; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .card, .panel {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 22px;
+    }
+    .card strong {
+      display: block;
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+    .panel { margin-bottom: 20px; }
+    .bar {
+      height: 10px;
+      background: #ddd;
+      margin: 16px 0;
+      border-radius: 5px;
+    }
+    .bar span {
+      display: block;
+      height: 100%;
+      width: 72%;
+      background: #a91e1e;
+      border-radius: 5px;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      padding: 14px 10px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+    th { background: #f7f7f7; }
+    button {
+      background: #a91e1e;
+      color: white;
+      border: 0;
+      padding: 12px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .page { display: none; }
+    .page.active { display: block; }
+    @media (max-width: 850px) {
+      aside { width: 150px; padding: 12px; }
+      main { margin-left: 150px; padding: 16px; }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <aside>
+    <h2>🍕 PizzaControl</h2>
+    <a class="active" onclick="abrir('dashboard', this)">Dashboard</a>
+    <a onclick="abrir('pedidos', this)">Pedidos</a>
+    <a onclick="abrir('produtos', this)">Produtos</a>
+    <a onclick="abrir('clientes', this)">Clientes</a>
+    <a onclick="abrir('estoque', this)">Estoque</a>
+    <a onclick="abrir('relatorios', this)">Relatórios</a>
+  </aside>
+
+  <main>
+    <section id="dashboard" class="page active">
+      <h1>Dashboard</h1>
+      <p>Visão geral da sua pizzaria</p>
+
+      <div class="cards">
+        <div class="card">
+          <strong>24</strong>Pedidos hoje
+        </div>
+        <div class="card">
+          <strong>R$ 1.248,90</strong>Vendas do dia
+        </div>
+        <div class="card">
+          <strong>1.230</strong>Clientes cadastrados
+        </div>
+        <div class="card">
+          <strong>45</strong>Produtos em estoque
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Vendas dos últimos 7 dias</h3>
+        <p>Segunda-feira</p><div class="bar"><span></span></div>
+        <p>Terça-feira</p><div class="bar"><span style="width:55%"></span></div>
+        <p>Quarta-feira</p><div class="bar"><span style="width:80%"></span></div>
+        <p>Quinta-feira</p><div class="bar"><span style="width:65%"></span></div>
+      </div>
+    </section>
+
+    <section id="pedidos" class="page">
+      <h1>Pedidos</h1>
+      <div class="panel">
+        <button onclick="alert('Protótipo: formulário de novo pedido')">
+          + Novo pedido
+        </button>
+        <br><br>
+        <table>
+          <tr><th>Nº</th><th>Cliente</th><th>Valor</th><th>Status</th></tr>
+          <tr><td>1047</td><td>João Silva</td><td>R$ 78,90</td><td>Em preparo</td></tr>
+          <tr><td>1046</td><td>Maria Souza</td><td>R$ 62,90</td><td>Entregue</td></tr>
+          <tr><td>1045</td><td>Carlos Lima</td><td>R$ 89,90</td><td>Recebido</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section id="produtos" class="page">
+      <h1>Produtos</h1>
+      <div class="panel">Cadastro e consulta de pizzas e bebidas.</div>
+    </section>
+    <section id="clientes" class="page">
+      <h1>Clientes</h1>
+      <div class="panel">Cadastro e consulta de clientes.</div>
+    </section>
+    <section id="estoque" class="page">
+      <h1>Estoque</h1>
+      <div class="panel">Controle de ingredientes e produtos.</div>
+    </section>
+    <section id="relatorios" class="page">
+      <h1>Relatórios</h1>
+      <div class="panel">Resumo de vendas e pedidos.</div>
+    </section>
+  </main>
+
+  <script>
+    function abrir(id, link) {
+      document.querySelectorAll('.page').forEach(p =>
+        p.classList.remove('active')
+      );
+      document.getElementById(id).classList.add('active');
+
+      document.querySelectorAll('aside a').forEach(a =>
+        a.classList.remove('active')
+      );
+      link.classList.add('active');
+    }
+  </script>
+</body>
+</html>
